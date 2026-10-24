@@ -10,7 +10,7 @@ A deep learning-powered traffic management system that classifies both regular a
 
 Modern networks simultaneously carry diverse types of traffic — VoIP, video streaming, web browsing, P2P, and file transfers. Traditional QoS configurations rely on static, manually defined port/protocol rules, which fall short in dynamic environments. Furthermore, the widespread use of **VPN tunneling** encrypts packet payloads, rendering traditional Deep Packet Inspection (DPI) obsolete.
 
-This project trains **tabular deep learning models** in PyTorch — a **DNN baseline** and an **FT-Transformer** — to classify **14 distinct traffic categories** (including VPN and non-VPN variants) using statistical flow features. The system is designed as an end-to-end deep learning pipeline, mapping each class to QoS priorities and DSCP values, then validating the enforcement on a network topology simulated in Cisco Packet Tracer.
+This project trains **tabular deep learning models** in PyTorch — an **MLP baseline** and an **FT-Transformer** — to classify **14 distinct traffic categories** (including VPN and non-VPN variants) using statistical flow features. The system is designed as an end-to-end deep learning pipeline, mapping each class to QoS priorities and DSCP values, then validating the enforcement on a network topology simulated in Cisco Packet Tracer.
 
 ---
 
@@ -19,7 +19,7 @@ This project trains **tabular deep learning models** in PyTorch — a **DNN base
 - **End-to-End DL Pipeline:** Clean, maintainable, and scalable Python codebase separating data processing, model training, and evaluation logic.
 - **Real-World Data:** Uses the **CIC-VPN2016 (ISCX)** dataset containing ~60,000 network flows.
 - **VPN Resilience:** Classifies 14 traffic types including VPN-encrypted flows without relying on payload inspection.
-- **Tabular Models:** DNN baseline plus FT-Transformer for flow-based tabular classification.
+- **Tabular Models:** MLP baseline plus FT-Transformer for flow-based tabular classification.
 - **Training Enhancements:** Focal loss, class-weighting, EMA, OneCycle scheduling, optional confusion-penalty and MixUp.
 - **Threshold Calibration:** Per-class threshold scaling on validation to improve class balance.
 - **Dynamic QoS Mapping:** DSCP-based priority assignment grouping VPN and non-VPN counterparts.
@@ -32,7 +32,7 @@ This project trains **tabular deep learning models** in PyTorch — a **DNN base
 ### Python Environment
 | Library | Version | Purpose |
 |---------|---------|---------|
-| **PyTorch** | ≥2.0 | DNN model design, dynamic computation graphs, training loops |
+| **PyTorch** | ≥2.0 | FT-Transformer and MLP model design, dynamic computation graphs, training loops |
 | **Pandas** | ≥1.5 | Dataset management and label encoding |
 | **Scikit-learn** | ≥1.1 | StandardScaler (normalization), stratified train/test splitting |
 | **Matplotlib / Seaborn** | ≥3.5 | Confusion matrix heatmaps and training curve visualizations |
@@ -66,8 +66,8 @@ The FT-Transformer is implemented in **PyTorch** (`models/ft_transformer.py`) an
 - **Embedding/Transformer:** Tabular feature embedding + multi-head attention.
 - **Default config:** `dim=256`, `depth=8`, `heads=8` with attention/FF/dropout regularisation.
 
-### DNN Baseline
-The DNN baseline is implemented in **PyTorch** (`models/model.py`).
+### MLP Baseline
+The MLP baseline is implemented in **PyTorch** (`models/model.py`).
 
 ```text
 Input (Flow Features)
