@@ -1,4 +1,4 @@
-# Deep Learning-Based Network Traffic Classification with QoS Optimization
+# Network Traffic QoS Prioritizer
 
 > **BLM2006 – Introduction to Computer Networks | Marmara University, Department of Computer Engineering**
 
@@ -213,4 +213,3 @@ After initiating traffic, verify that the Router is correctly classifying the pa
     show policy-map interface GigabitEthernet0/0
     ```
     *If correctly configured, you will see the "packets matched" counter increasing for the specific class corresponding to the ToS value you sent.*
-```
